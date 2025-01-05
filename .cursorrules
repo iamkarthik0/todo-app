@@ -1,0 +1,205 @@
+# App Development Guidelines
+
+## Code Style and Structure
+- Write concise, technical TypeScript code with accurate examples
+- Use functional and declarative programming patterns; avoid classes
+- Prefer iteration and modularization over code duplication
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError)
+
+## Project Structure
+app/
+├── components/     # React components
+│   ├── ui/        # shadcn/ui components
+│   └── custom/    # Custom components
+├── hooks/          # Custom React hooks
+├── utils/          # Helper functions
+├── types/          # TypeScript types
+├── lib/            # Shared libraries
+├── actions/        # Server Actions
+├── webhooks/       # Webhook handlers
+├── public/         # Public assets including manifest.json
+└── db/            # Database schemas and queries
+
+## Tech Stack
+- React
+- TypeScript
+- Next.js
+- Tailwind CSS
+- shadcn/ui
+- Neon DB (Serverless Postgres)
+- PWA (Progressive Web App)
+
+## PWA Configuration
+- Implement service worker for offline functionality
+- Add manifest.json for PWA installation
+- Configure app icons and splash screens
+- Enable push notifications
+- Implement offline-first data strategy
+- Cache static assets and API responses
+- Handle background sync for offline actions
+- Optimize for mobile devices
+
+## Database Setup (Neon)
+- Use Neon's serverless Postgres for scalable database
+- Implement connection pooling with @neondatabase/serverless
+- Use Prisma ORM for type-safe database operations
+- Enable auto-scaling for compute and storage
+- Implement database branching for development/staging
+- Use point-in-time restore for data recovery
+- Enable automated backups
+- Implement database migrations with Prisma Migrate
+
+## Code Splitting and Performance
+- Use dynamic imports with React.lazy() for route-based code splitting
+- Implement page-level code splitting using Next.js dynamic imports
+- Lazy load heavy components and libraries when not immediately needed
+- Use Suspense boundaries strategically with fallback UI
+- Implement proper loading states for async components
+- Optimize PWA performance with proper caching strategies
+
+## Caching Strategy
+- Use SWR or React Query for data fetching and caching
+- Implement proper cache invalidation strategies
+- Use Next.js ISR (Incremental Static Regeneration) when applicable
+- Leverage browser caching with appropriate cache headers
+- Implement service worker for offline functionality
+- Use memory caching for frequently accessed data
+- Configure CDN caching for static assets
+- Cache database queries using Neon's query cache
+- Implement PWA cache strategies (Cache First, Network First, Stale While Revalidate)
+
+## Naming Conventions
+- Use lowercase with dashes for directories (e.g., components/form-wizard)
+- Favor named exports for components and utilities
+- Use PascalCase for component files (e.g., UserForm.tsx)
+- Use camelCase for utility files (e.g., formValidator.ts)
+- Follow shadcn/ui component naming conventions for consistency
+- Prefix server actions with 'action' (e.g., actionCreateUser)
+- Suffix webhook handlers with 'Handler' (e.g., stripeWebhookHandler)
+- Prefix database queries with 'db' (e.g., dbGetUsers)
+
+## TypeScript Usage
+- Use TypeScript for all code; prefer interfaces over types
+- Avoid enums; use const objects with 'as const' assertion
+- Use functional components with TypeScript interfaces
+- Use absolute imports for all files @/...
+- Use explicit return types for all functions
+- Type server actions with proper input/output types
+- Define webhook payload types for type safety
+- Use Prisma's type inference for database schemas
+
+## State Management
+- Use React Context for global state when needed
+- Implement proper cleanup in useEffect hooks
+- Cache state updates for better performance
+- Use server actions for server-side state mutations
+- Implement optimistic updates with server actions
+- Handle database state with proper error boundaries
+- Manage PWA installation and update states
+
+## Syntax and Formatting
+- Use "function" keyword for pure functions
+- Avoid unnecessary curly braces in conditionals
+- Use declarative JSX
+- Follow shadcn/ui component composition patterns
+- Use 'use server' directive for server actions
+- Format webhook handlers consistently
+- Follow SQL style guide for database queries
+
+## UI and Styling
+- Implement Tailwind CSS for styling
+- Use shadcn/ui components as base building blocks
+- Customize shadcn/ui theme variables for consistent branding
+- Follow responsive design principles
+- Ensure accessibility standards are met
+- Lazy load images and use proper image optimization
+- Show loading states during server action calls
+- Display database operation status indicators
+- Implement PWA install prompt and update notifications
+- Design mobile-first UI for better PWA experience
+
+## Error Handling
+- Implement proper error boundaries
+- Log errors appropriately for debugging
+- Provide user-friendly error messages using shadcn/ui Toast component
+- Handle network failures gracefully
+- Cache error states for offline handling
+- Implement error handling for server actions
+- Handle webhook failures with proper error responses
+- Handle database connection errors and retries
+- Implement offline error handling for PWA
+
+## Testing
+- Write unit tests for utilities and components
+- Implement E2E tests for critical flows
+- Test across different browsers
+- Test performance and accessibility
+- Test shadcn/ui component customizations
+- Test caching behavior and code splitting
+- Test server actions with proper mocking
+- Test webhook endpoints with mock payloads
+- Test database queries with test database branches
+- Test PWA functionality (offline mode, installation, updates)
+
+## Security
+- Sanitize user inputs
+- Handle sensitive data properly
+- Implement proper CORS handling
+- Secure cached data appropriately
+- Validate server action inputs
+- Verify webhook signatures
+- Implement rate limiting for webhooks
+- Secure sensitive environment variables
+- Use Neon's built-in SSL/TLS encryption
+- Implement database access controls
+- Use parameterized queries to prevent SQL injection
+- Secure PWA service worker and manifest
+
+## Git Usage
+Commit Message Prefixes:
+- "fix:" for bug fixes
+- "feat:" for new features
+- "perf:" for performance improvements
+- "docs:" for documentation changes
+- "style:" for formatting changes
+- "refactor:" for code refactoring
+- "test:" for adding missing tests
+- "chore:" for maintenance tasks
+- "action:" for server action changes
+- "webhook:" for webhook-related changes
+- "db:" for database schema changes
+- "pwa:" for PWA-related changes
+
+Rules:
+- Use lowercase for commit messages
+- Keep the summary line concise
+- Include description for non-obvious changes
+- Reference issue numbers when applicable
+
+## Documentation
+- Maintain clear README with setup instructions
+- Document API interactions and data flows
+- Document shadcn/ui component customizations
+- Don't include comments unless it's for complex logic
+- Document caching strategies and code splitting decisions
+- Document server action usage and patterns
+- Document webhook endpoints and payloads
+- Document database schema and migrations
+- Maintain ERD diagrams for database relations
+- Document PWA features and offline capabilities
+
+## Development Workflow
+- Use proper version control
+- Implement proper code review process
+- Test in multiple environments
+- Follow semantic versioning for releases
+- Maintain changelog
+- Keep shadcn/ui components up to date
+- Monitor and optimize bundle sizes
+- Regular performance audits for code splitting and caching
+- Test server actions in development
+- Verify webhook endpoints with test events
+- Use database branching for feature development
+- Monitor database performance metrics
+- Test PWA functionality in development and production
+- Monitor PWA metrics and user engagement
